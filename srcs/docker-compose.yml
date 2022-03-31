@@ -1,7 +1,10 @@
+# Volumes used in this app
 volumes:
         wordpress:
 
+# Services used in this app
 services:
+        # nginx service
         nginx:
                 container_name: nginx
                 build: ./requirements/nginx/
@@ -9,6 +12,8 @@ services:
                         - "80:80"
                 volumes:
                         - wordpress:/var/www/wordpress
+
+        # wordpress + php-fpm service
         wordpress:
                 container_name: wordpress
                 build: ./requirements/wordpress/
