@@ -1,0 +1,16 @@
+volumes:
+        wordpress:
+
+services:
+        nginx:
+                container_name: nginx
+                build: ./requirements/nginx/
+                ports:
+                        - "80:80"
+                volumes:
+                        - wordpress:/var/www/wordpress
+        wordpress:
+                container_name: wordpress
+                build: ./requirements/wordpress/
+                volumes:
+                        - wordpress:/var/www/wordpress
