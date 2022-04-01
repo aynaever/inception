@@ -1,8 +1,3 @@
-# Volumes used in this app
-volumes:
-        wordpress:
-        db:
-
 # Services used in this app
 services:
         # nginx service
@@ -11,9 +6,11 @@ services:
                 image: nginx
                 build: ./requirements/nginx/
                 ports:
-                        - "80:80"
+                        - "443:443"
                 volumes:
                         - wordpress:/var/www/wordpress
+                networks:
+                        - my-net
 
         # wordpress + php-fpm service
         wordpress:
@@ -22,3 +19,20 @@ services:
                 build: ./requirements/wordpress/
                 volumes:
                         - wordpress:/var/www/wordpress
+                networks:
+                        - my-net
+
+# Volumes used in this app
+volumes:
+        wordpress:
+                name: wordpress
+                driver_opts:
+                        type: "local"
+                        o: bind
+                        device: /home/anaouadi/data/wordpress
+
+# Specify user-defined bridge network
+networks:
+        my-net:
+                name: my-net
+                driver: bridge
