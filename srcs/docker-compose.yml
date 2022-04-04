@@ -1,0 +1,57 @@
+# Services used in this app
+services:
+        # nginx service
+        nginx:
+                container_name: nginx
+                image: nginx
+                build: ./requirements/nginx/
+                ports:
+                        - "443:443"
+                volumes:
+                        - wordpress:/var/www/wordpress
+                networks:
+                        - my-net
+                restart: unless-stopped
+
+        # wordpress + php-fpm service
+        wordpress:
+                container_name: wordpress
+                image: wordpress
+                build: ./requirements/wordpress/
+                volumes:
+                        - wordpress:/var/www/wordpress
+                networks:
+                        - my-net
+                restart: unless-stopped
+        
+        # mariadb service
+        db:
+                container_name: db
+                image: db
+                build: ./requirements/mariadb/
+                volumes:
+                        - db:/var/lib/mysql
+                networks:
+                        - my-net
+                restart: unless-stopped
+
+# Volumes used in this app
+volumes:
+        wordpress:
+                name: wordpress
+                driver_opts:
+                        type: "local"
+                        o: bind
+                        device: /home/anaouadi/data/wordpress
+        db:
+                name: db
+                driver_opts:
+                        type: "local"
+                        o: bind
+                        device: /home/anaouadi/data/db
+
+# Specify user-defined bridge network
+networks:
+        my-net:
+                name: my-net
+                driver: bridge
