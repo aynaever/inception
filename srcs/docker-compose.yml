@@ -11,6 +11,7 @@ services:
                         - wordpress:/var/www/wordpress
                 networks:
                         - my-net
+                restart: unless-stopped
 
         # wordpress + php-fpm service
         wordpress:
@@ -21,6 +22,18 @@ services:
                         - wordpress:/var/www/wordpress
                 networks:
                         - my-net
+                restart: unless-stopped
+        
+        # mariadb service
+        db:
+                container_name: db
+                image: db
+                build: ./requirements/mariadb/
+                volumes:
+                        - db:/var/lib/mysql
+                networks:
+                        - my-net
+                restart: unless-stopped
 
 # Volumes used in this app
 volumes:
@@ -30,6 +43,12 @@ volumes:
                         type: "local"
                         o: bind
                         device: /home/anaouadi/data/wordpress
+        db:
+                name: db
+                driver_opts:
+                        type: "local"
+                        o: bind
+                        device: /home/anaouadi/data/db
 
 # Specify user-defined bridge network
 networks:
