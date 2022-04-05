@@ -43,7 +43,7 @@ There are two different subdirectories:
 1. wordpress : website's files
 2. db : database  
 
-Thanks to Docker volumes, even after stoping your web app or a service, your data will persist and you can always check it and move it from your host machine or making backups.
+Thanks to Docker volumes, even after stoping your web app or a service, your data will persist and you can always check it and move it from your host machine or make backups.
 
 ## How can I configure each service ? ##
 Each service is already configured and customized so it will work smoothly, but if you want to change any configuration, you check the **README.md** of the service that you want in **/inception/srcs/requirements/*service*/README.md**
