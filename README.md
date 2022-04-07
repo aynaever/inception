@@ -1,4 +1,4 @@
-[#](#) Inception  42  
+# Inception  42  
 Setting a complete Web app (Nginx, wordpress+php-fpm, MariaDB) in Docker, each service in its own Container.
 
 ## Table of Contents
